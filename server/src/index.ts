@@ -4,7 +4,7 @@ import { User } from './entity/User';
 import 'dotenv/config'
 import "reflect-metadata";
 import { createConnection } from 'typeorm';
-import { UserResolver } from './UserResolver';
+import { UserResolver } from './resolvers/UserResolver';
 
 import cors from "cors";
 //express
@@ -81,9 +81,9 @@ import { verify } from 'jsonwebtoken';
     apolloServer.applyMiddleware({ app, cors: false })
 
 
-    app.listen("4000", () => {
+    app.listen(process.env.APP_PORT, () => {
         consola.success({
-            message: "express server started",
+            message: `express server started on http://localhost:${process.env.APP_PORT}/graphql`,
             badge: true
         })
 

@@ -1,13 +1,13 @@
+import { IContext } from './../interfaces/IContext';
 import { verify } from 'jsonwebtoken';
-import { createRefreshToken, createAccessToken } from './auth/auth';
-import { IMyContext } from './MyContext';
-import { User } from './entity/User';
+import { createRefreshToken, createAccessToken } from '../auth/auth';
+import { User } from '../entity/User';
 import { Resolver, Query, Mutation, Arg, ObjectType, Field, Ctx, UseMiddleware, Int } from "type-graphql"
 
 //bcrypt
 import { hash, compare } from "bcryptjs"
-import { isAuth } from './auth/isAuth';
-import { sendRefreshToken } from './sendRefreshToken';
+import { isAuth } from '../auth/isAuth';
+import { sendRefreshToken } from '../sendRefreshToken';
 import { getConnection } from 'typeorm';
 
 @ObjectType()
@@ -29,7 +29,7 @@ export class UserResolver {
     @Query(() => String)
     @UseMiddleware(isAuth)
     bye(
-        @Ctx() { payload }: IMyContext
+        @Ctx() { payload }: IContext
     ) {
         console.log('payload:', payload)
         return `your userId is ${payload!.userId}`;
@@ -38,7 +38,7 @@ export class UserResolver {
     //logout
     @Mutation(() => Boolean)
     async logout(
-        @Ctx() { res }: IMyContext
+        @Ctx() { res }: IContext
     ) {
         sendRefreshToken(res, "");
         res.clearCookie
@@ -59,7 +59,7 @@ export class UserResolver {
 
     @Query(() => User, { nullable: true })
     me(
-        @Ctx() context: IMyContext
+        @Ctx() context: IContext
     ) {
         const authorization = context.req.headers['authorization'];
 
@@ -92,7 +92,7 @@ export class UserResolver {
     async login(
         @Arg("email") email: string,
         @Arg("password") password: string,
-        @Ctx() { res }: IMyContext
+        @Ctx() { res }: IContext
     ): Promise<LoginResponse | any> {
 
         //check if user exist 
