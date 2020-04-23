@@ -1,14 +1,17 @@
 import React from 'react'
 
 //antd
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 import { RouteComponentProps } from 'react-router-dom';
 import { useLoginMutation, MeDocument, MeQuery } from '../generated/graphql';
 import { setAccessToken } from '../accessToken';
 
+
+
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
+
 
     const [login] = useLoginMutation()
     const onFinish = async (values: any) => {
@@ -39,11 +42,15 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
             history.push('/')
         }).catch((err) => {
             console.log('err:', err)
+            let m = err.message.split(':')[1]
+            message.error(m, 5)
         })
 
     };
 
     return (
+
+
         <div>
             <div className="register-container">
                 <Form
@@ -86,5 +93,6 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
                 </Form>
             </div>
         </div>
+
     );
 }

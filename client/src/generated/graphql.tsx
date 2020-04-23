@@ -13,29 +13,26 @@ export type Scalars = {
 
 export type Query = {
    __typename?: 'Query';
-  hello: Scalars['String'];
-  bye: Scalars['String'];
-  me?: Maybe<User>;
   users: Array<User>;
+  me?: Maybe<User>;
+  hello: Scalars['String'];
 };
 
 export type User = {
    __typename?: 'User';
-  id: Scalars['Int'];
+  id: Scalars['ID'];
+  lastname: Scalars['String'];
+  firstname: Scalars['String'];
+  name: Scalars['String'];
   email: Scalars['String'];
 };
 
 export type Mutation = {
    __typename?: 'Mutation';
-  logout: Scalars['Boolean'];
-  revokeRefreshTokenForUser: Scalars['Boolean'];
   login: LoginResponse;
-  register: Scalars['Boolean'];
-};
-
-
-export type MutationRevokeRefreshTokenForUserArgs = {
-  userId: Scalars['Int'];
+  logout: Scalars['Boolean'];
+  register: User;
+  revokeRefreshTokenForUser: Scalars['Boolean'];
 };
 
 
@@ -46,8 +43,12 @@ export type MutationLoginArgs = {
 
 
 export type MutationRegisterArgs = {
-  password: Scalars['String'];
-  email: Scalars['String'];
+  data: RegisterInput;
+};
+
+
+export type MutationRevokeRefreshTokenForUserArgs = {
+  userId: Scalars['Int'];
 };
 
 export type LoginResponse = {
@@ -56,13 +57,12 @@ export type LoginResponse = {
   user: User;
 };
 
-export type ByeQueryVariables = {};
-
-
-export type ByeQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'bye'>
-);
+export type RegisterInput = {
+  firstname: Scalars['String'];
+  lastname: Scalars['String'];
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
 
 export type HelloQueryVariables = {};
 
@@ -85,7 +85,7 @@ export type LoginMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'email'>
+      & Pick<User, 'id' | 'lastname' | 'firstname' | 'name' | 'email'>
     ) }
   ) }
 );
@@ -112,12 +112,17 @@ export type MeQuery = (
 export type RegisterMutationVariables = {
   email: Scalars['String'];
   password: Scalars['String'];
+  lastname: Scalars['String'];
+  firstname: Scalars['String'];
 };
 
 
 export type RegisterMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'register'>
+  & { register: (
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'lastname' | 'firstname' | 'name' | 'email'>
+  ) }
 );
 
 export type UsersQueryVariables = {};
@@ -127,41 +132,11 @@ export type UsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email'>
+    & Pick<User, 'id' | 'email' | 'name' | 'lastname' | 'firstname'>
   )> }
 );
 
 
-export const ByeDocument = gql`
-    query Bye {
-  bye
-}
-    `;
-
-/**
- * __useByeQuery__
- *
- * To run a query within a React component, call `useByeQuery` and pass it any options that fit your needs.
- * When your component renders, `useByeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useByeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useByeQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ByeQuery, ByeQueryVariables>) {
-        return ApolloReactHooks.useQuery<ByeQuery, ByeQueryVariables>(ByeDocument, baseOptions);
-      }
-export function useByeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ByeQuery, ByeQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ByeQuery, ByeQueryVariables>(ByeDocument, baseOptions);
-        }
-export type ByeQueryHookResult = ReturnType<typeof useByeQuery>;
-export type ByeLazyQueryHookResult = ReturnType<typeof useByeLazyQuery>;
-export type ByeQueryResult = ApolloReactCommon.QueryResult<ByeQuery, ByeQueryVariables>;
 export const HelloDocument = gql`
     query Hello {
   hello
@@ -198,6 +173,9 @@ export const LoginDocument = gql`
     accessToken
     user {
       id
+      lastname
+      firstname
+      name
       email
     }
   }
@@ -292,8 +270,14 @@ export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>;
 export const RegisterDocument = gql`
-    mutation Register($email: String!, $password: String!) {
-  register(email: $email, password: $password)
+    mutation Register($email: String!, $password: String!, $lastname: String!, $firstname: String!) {
+  register(data: {firstname: $firstname, lastname: $lastname, email: $email, password: $password}) {
+    id
+    lastname
+    firstname
+    name
+    email
+  }
 }
     `;
 export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
@@ -313,6 +297,8 @@ export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMuta
  *   variables: {
  *      email: // value for 'email'
  *      password: // value for 'password'
+ *      lastname: // value for 'lastname'
+ *      firstname: // value for 'firstname'
  *   },
  * });
  */
@@ -327,6 +313,9 @@ export const UsersDocument = gql`
   users {
     id
     email
+    name
+    lastname
+    firstname
   }
 }
     `;

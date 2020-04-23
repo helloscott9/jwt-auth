@@ -14,6 +14,11 @@ export const Home: React.FC<HomeProps> = ({ }) => {
 
 
     const { data, loading } = useUsersQuery({ fetchPolicy: 'network-only' })
+    console.log('data:', data)
+
+    if (!data) {
+        return <div></div>
+    }
 
     if (loading) {
         return <Skeleton />
@@ -25,7 +30,7 @@ export const Home: React.FC<HomeProps> = ({ }) => {
                     ghost={false}
 
                     title="Title"
-                    subTitle="This is a subtitle"
+                    subTitle={data.name}
                     extra={[
                         <Button key="3">Operation</Button>,
                         <Button key="2">Operation</Button>,

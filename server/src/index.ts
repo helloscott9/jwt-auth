@@ -4,7 +4,11 @@ import { User } from './entity/User';
 import 'dotenv/config'
 import "reflect-metadata";
 import { createConnection } from 'typeorm';
-import { UserResolver } from './resolvers/UserResolver';
+
+import session from "express-session";
+import { RedisClient } from "redis";
+import connectRedis from "connect-redis";
+
 
 import cors from "cors";
 //express
@@ -18,6 +22,9 @@ import { buildSchema } from "type-graphql";
 
 import cookieParser from "cookie-parser"
 import { verify } from 'jsonwebtoken';
+import { redis } from './redis';
+
+
 
 (async () => {
     //initialise express
@@ -71,12 +78,31 @@ import { verify } from 'jsonwebtoken';
 
     await createConnection();
 
+    //express session
+    const RedisStore = connectRedis(session); // connect node.req.session to redis backing store
+    const sessionOption: session.SessionOptions = {
+        store: new RedisStore({
+            client: (redis as unknown) as RedisClient,
+        }),
+        name: "art",
+        secret: process.env.SESSION_SECRET || "",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+        },
+    };
+
+    app.use(session(sessionOption));
+
     //Instance apollo server
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
-            resolvers: [UserResolver]
+            resolvers: [__dirname + "/modules/**/resolver.*"]
         }),
-        context: ({ req, res }) => ({ req, res })
+        context: ({ req, res }) => ({ req, res }),
     })
     apolloServer.applyMiddleware({ app, cors: false })
 
@@ -86,7 +112,6 @@ import { verify } from 'jsonwebtoken';
             message: `express server started on http://localhost:${process.env.APP_PORT}/graphql`,
             badge: true
         })
-
     })
 
 })()

@@ -4,9 +4,9 @@
    "port": 5432,
    "username": "artkodes",
    "password": "artkodes",
-   "database": "jwt",
+   "database": "jwt-auth",
    "synchronize": true,
-   "logging": false,
+   "logging": true,
    "entities": [
       "src/entity/**/*.ts"
    ],

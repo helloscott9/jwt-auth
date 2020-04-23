@@ -19,7 +19,9 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
         const response = await register({
             variables: {
                 email: values.email,
-                password: values.password
+                password: values.password,
+                lastname: "",
+                firstname: ""
             }
         }).then((res) => {
             console.log('response:', res)
