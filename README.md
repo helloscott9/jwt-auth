@@ -20,8 +20,8 @@ Learn how to add **JWT authentication** to your project with this fullstack tuto
 
 3.Create database called  `jwt-auth`
 
-4.[Add a user](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)  with the username  `artkodes`  and and  password `artkodes`. (You can change what these values are in the  [ormconfig.json](https://github.com/benawad/graphql-ts-server-boilerplate/blob/master/ormconfig.json))
-5.  Clone and install dependecies
+4. [Add a user](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)  with the username  `artkodes`  and and  password `artkodes`. (You can change what these values are in the  [ormconfig.json](https://github.com/benawad/graphql-ts-server-boilerplate/blob/master/ormconfig.json))
+5. Clone and install dependecies
 
 ```
 git clone https://github.com/helloscott9/jwt-auth.git
@@ -29,11 +29,11 @@ intall dependecies in server and web folder
 yarn or npm i 
 ```
 
-6.Go to your **Redis** folder and run `src/redis-server`
+6. Go to your **Redis** folder and run `src/redis-server`
 
 > if you don't have **Redis** on your computer, click [here](https://www.youtube.com/watch?v=4dzu1A1MW2A)
 
-7.Start the all server
+7. Start the all server
 `yarn start`
 
 To verified it worked, you can go to [http://localhost:4000](http://localhost:4000/)
