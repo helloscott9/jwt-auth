@@ -1,14 +1,16 @@
-import { createRefreshToken, createAccessToken } from './auth/auth';
-import { sendRefreshToken } from './sendRefreshToken';
-import { User } from './entity/User';
 import 'dotenv/config'
 import "reflect-metadata";
+
+import { User } from './entity/User';
 import { createConnection } from 'typeorm';
 
 import session from "express-session";
 import { RedisClient } from "redis";
 import connectRedis from "connect-redis";
 
+import { createSchema } from './utils/createSchema';
+import { createRefreshToken, createAccessToken } from './auth/auth';
+import { sendRefreshToken } from './sendRefreshToken';
 
 import cors from "cors";
 //express
@@ -18,7 +20,6 @@ import consola from "consola";
 
 //apollo server express
 import { ApolloServer } from "apollo-server-express"
-import { buildSchema } from "type-graphql";
 
 import cookieParser from "cookie-parser"
 import { verify } from 'jsonwebtoken';
@@ -99,9 +100,7 @@ import { redis } from './redis';
 
     //Instance apollo server
     const apolloServer = new ApolloServer({
-        schema: await buildSchema({
-            resolvers: [__dirname + "/modules/**/resolver.*"]
-        }),
+        schema: await createSchema(),
         context: ({ req, res }) => ({ req, res }),
     })
     apolloServer.applyMiddleware({ app, cors: false })
