@@ -47,6 +47,7 @@ To verified it worked, you can go to [http://localhost:4000](http://localhost:40
 - PostgreSQL
 - React
 - Apollo
+- Redis
 
 ## Backend
 
