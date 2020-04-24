@@ -31,7 +31,7 @@ yarn or npm i
 
 6.Go to your **Redis** folder and run `src/redis-server`
 
-> if you don't have **Redis** on your computer, click [here]([https://www.youtube.com/watch?v=4dzu1A1MW2A](https://www.youtube.com/watch?v=4dzu1A1MW2A)
+> if you don't have **Redis** on your computer, click [here]([https://www.youtube.com/watch?v=4dzu1A1MW2A])
 
 7.Start the all server
 `yarn start`
@@ -74,4 +74,4 @@ To verified it worked, you can go to [http://localhost:4000](http://localhost:40
 
 >Create database called `jwt-auth-test`
 
-To  learn `jest` for french peoples, you can see this [video]([https://www.youtube.com/watch?v=_9JTTGI9-K0](https://www.youtube.com/watch?v=_9JTTGI9-K0)).
+To  learn `jest` for french peoples, you can see this [video](https://www.youtube.com/watch?v=_9JTTGI9-K0).
