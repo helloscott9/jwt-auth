@@ -26,7 +26,7 @@ Learn how to add **JWT authentication** to your project with this fullstack tuto
 ```
 git clone https://github.com/helloscott9/jwt-auth.git
 intall dependecies in server and web folder
-yarn or npm i
+yarn or npm i 
 ```
 
 6.Go to your **Redis** folder and run `src/redis-server`
@@ -40,13 +40,13 @@ To verified it worked, you can go to [http://localhost:4000](http://localhost:40
 
 ## Technologies
 
--Typescript
--GraphQL
--TypeGraphQL
--TypeORM
--PostgreSQL
--React
--Apollo
+- Typescript
+- GraphQL
+- TypeGraphQL
+- TypeORM
+- PostgreSQL
+- React
+- Apollo
 
 ## Backend
 
