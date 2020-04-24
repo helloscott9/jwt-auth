@@ -25,7 +25,7 @@ Learn how to add **JWT authentication** to your project with this fullstack tuto
 
 ```
 git clone https://github.com/helloscott9/jwt-auth.git
-intall dependecies in server and web folder
+intall dependecies in server and client folder
 yarn or npm i 
 ```
 
