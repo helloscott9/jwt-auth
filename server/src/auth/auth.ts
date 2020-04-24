@@ -4,7 +4,7 @@ import { sign } from 'jsonwebtoken';
 export const createAccessToken = async (user: User) => {
     return sign({
         userId: user.id
-    }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: "15s" })
+    }, process.env.ACCESS_TOKEN_SECRET!, { expiresIn: "15m" })
 }
 
 export const createRefreshToken = async (user: User) => {

@@ -27,6 +27,7 @@ Learn how to add **JWT authentication** to your project with this fullstack tuto
  5. Refresh the token
  6. Revoke tokens for users
  7. Redis
+ 8. Graphql-upload
 
 ## Frontend
 
