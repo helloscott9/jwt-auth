@@ -2,21 +2,51 @@
 
 Learn how to add **JWT authentication** to your project with this fullstack tutorial using **Node.js, Typescript, GraphQL, React, and PostgreSQL**.
 
+## Installing
+
 >Make sure to setup PostgreSQL for the GraphQL server
 
 1. Install PostgreSQL on your computer
-2. Create database called  `jwt-auth`
-3. [Add a user](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)  with the username  `postgres`  and and no password. (You can change what these values are in the  [ormconfig.json](https://github.com/benawad/graphql-ts-server-boilerplate/blob/master/ormconfig.json))
+
+* Mac: https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb
+
+* Windows: https://www.guru99.com/download-install-postgresql.html
+
+* Docker: https://www.youtube.com/watch?v=G3gnMSyX-XM
+
+* Linux: you know what you're doing
+
+* How to create a user: https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
+3.Create database called  `jwt-auth`
+
+4.[Add a user](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e)  with the username  `artkodes`  and and  password `artkodes`. (You can change what these values are in the  [ormconfig.json](https://github.com/benawad/graphql-ts-server-boilerplate/blob/master/ormconfig.json))
+5.  Clone and install dependecies
+
+```
+git clone https://github.com/helloscott9/jwt-auth.git
+intall dependecies in server and web folder
+yarn or npm i
+```
+
+6.Go to your **Redis** folder and run `src/redis-server`
+
+> if you don't have **Redis** on your computer, click [here]([https://www.youtube.com/watch?v=4dzu1A1MW2A](https://www.youtube.com/watch?v=4dzu1A1MW2A)
+
+7.Start the all server
+`yarn start`
+
+To verified it worked, you can go to [http://localhost:4000](http://localhost:4000/)
 
 ## Technologies
 
-- Typescript
-- GraphQL
-- TypeGraphQL
-- TypeORM
-- PostgreSQL
-- React
-- Apollo
+-Typescript
+-GraphQL
+-TypeGraphQL
+-TypeORM
+-PostgreSQL
+-React
+-Apollo
 
 ## Backend
 
@@ -44,4 +74,4 @@ Learn how to add **JWT authentication** to your project with this fullstack tuto
 
 >Create database called `jwt-auth-test`
 
-To  learn `jest` for french peoples, you can see this [video]([https://www.youtube.com/watch?v=_9JTTGI9-K0](https://www.youtube.com/watch?v=_9JTTGI9-K0)) .
+To  learn `jest` for french peoples, you can see this [video]([https://www.youtube.com/watch?v=_9JTTGI9-K0](https://www.youtube.com/watch?v=_9JTTGI9-K0)).
