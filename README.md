@@ -31,7 +31,7 @@ yarn or npm i
 
 6.Go to your **Redis** folder and run `src/redis-server`
 
-> if you don't have **Redis** on your computer, click [here]([https://www.youtube.com/watch?v=4dzu1A1MW2A])
+> if you don't have **Redis** on your computer, click [here](https://www.youtube.com/watch?v=4dzu1A1MW2A)
 
 7.Start the all server
 `yarn start`
