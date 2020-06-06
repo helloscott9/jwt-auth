@@ -26,7 +26,7 @@
    },
    "dependencies": {
       "@types/graphql-upload": "^8.0.3",
-      "apollo-server-express": "^2.12.0",
+      "apollo-server-express": "^2.14.2",
       "apollo-upload-server": "^7.1.0",
       "bcryptjs": "^2.4.3",
       "class-validator": "^0.12.1",
